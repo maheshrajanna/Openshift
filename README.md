@@ -104,10 +104,10 @@ Group of one or more containers that are always co-located, co-scheduled, and ru
 
 2. Services 
     * An abstraction to define a logical set of Pods bound by a policy by to access them 
-    * Services are exposed through internal and external endpoints 
+    * Services are exposed through internal and external endpoints/cluster 
     * Services can also point to non-Kubernetes endpoints through a Virtual-IP-Bridge 
     * Supports TCP and UDP 
-    * Interfaces with kube-proxy to manipulate iptables ● Service can be exposed internal or external to the cluster
+    * Interfaces with kube-proxy to manipulate iptables 
 
 
 3. Replication Controller 
