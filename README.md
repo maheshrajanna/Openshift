@@ -1,3 +1,5 @@
+http://blog.arungupta.me/openshift-v3-getting-started-javaee7-wildfly-mysql/
+
 # Openshift
 
 
