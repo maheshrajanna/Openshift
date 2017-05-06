@@ -1,14 +1,22 @@
 # Openshift
 
 
-![Alt text](https://github.com/maheshrajanna/Docker/blob/master/fyile.png?raw=true "Optional Title")
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/DKO.png?raw=true "Optional Title")
+
+
+
+# Openshift Architecture
+
+
+
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Architecture.png?raw=true "Optional Title")
 
 
 
 # Master Node
 
 
-![Alt text](https://github.com/maheshrajanna/Docker/blob/master/fyile.png?raw=true "Optional Title")
+![Alt text](https://https://github.com/maheshrajanna/Openshift/blob/master/Master.png?raw=true "Optional Title")
 
 
 Master node is responsible for the management of Kubernetes cluster. This is the entry point of all administrative tasks. Master node is the one taking care of orchestrating the worker nodes, where the actual services are running.
