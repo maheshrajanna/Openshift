@@ -95,13 +95,14 @@ An example of such a controller is the Replication controller, which takes care 
 Other examples of controllers are endpoints controller, namespace controller, and serviceaccounts controller, but we will not dive into details here.
 
 
-### etcd storage
+### etcd 
 
 etcd is a simple, distributed, consistent key-value store. It’s mainly used for shared configuration and service discovery. 
 It provides a REST API for CRUD operations as well as an interface to register watchers on specific nodes, which enables a reliable way to notify the rest of the cluster about configuration changes.
 
 Example of data stored by Kubernetes in etcd are jobs being scheduled, created and deployed pod/service details and state, namespaces and replication informations, etc.
 
+https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html
 
 
 # Worker node
@@ -157,14 +158,13 @@ DNS and UI etc.
       and Unix Time Sharing (UTS) namespace 
     * Alternative to a VM with multiple processes
 
-
 2. SERVICES 
     * An abstraction to define a logical set of Pods bound by a policy by to access them 
     * Services are exposed through internal and external endpoints/cluster 
     * Services can also point to non-Kubernetes endpoints through a Virtual-IP-Bridge 
     * Supports TCP and UDP 
     * Interfaces with kube-proxy to manipulate iptables 
-
+    * Service will understand the PODS with Labels 
 
 3. REPLICATION CONTROLLER 
     * Ensures that a Pod or homogeneous set of Pods are always up and available. Always maintains desired number of Pods, 
@@ -172,9 +172,90 @@ DNS and UI etc.
     * Creating a replication controller with a count of 1 ensures that a Pod is always available. Replication Controller and
       Pods are associated through "Labels".
 
+4. INGRESS/ROUTE
+    * An OpenShift route exposes a service at a host name, like www.example.com, so that external clients can reach it by name.
+    * DNS resolution for a host name is handled separately from routing; your administrator may have configured a cloud domain
+      that will always correctly resolve to the OpenShift router, or if using an unrelated host name you may need to modify its
+      DNS records independently to resolve to the router.
 
+5. LABELS AND SELECTORS
+    * Labels are used to organize, group, or select API objects. For example, pods are "tagged" with labels, and then services
+      use label selectors to identify the pods they proxy to. This makes it possible for services to reference groups of pods,
+      even treating pods with potentially different Docker containers as related entities.
+      https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+
+
+
+
+Multi-Container Pods in OPenshift
+
+
+Web Pod has a Python Flask container and a Redis container
+DB Pod has a MySQL container
+When data is retrieved through the Python REST API, it first checks within Redis cache before accessing MySQL
+Each time data is fetched from MySQL, it gets cached in the Redis container of the same Pod as the Python Flask container
+When the additional Web Pods are launched manually or through a Replica Set, co-located pairs of Python Flask and Redis containers are scheduled together
+
+
+
+
+Build a Docker image from existing Python source code and push it to Docker Hub. Replace DOCKER_HUB_USER with your Docker Hub username.
 
 ```
+cd Build
+docker build . -t <DOCKER_HUB_USER>/py-red-sql
+docker push <DOCKER_HUB_USER>/py-red-sql
+Deploy the app to Kubernetes
+````
+
+````
+cd ../Deploy
+kubectl create -f db-pod.yml
+kubectl create -f db-svc.yml
+kubectl create -f web-pod-1.yml
+kubectl create -f web-svc.yml
+Check that the Pods and Services are created
+````
+````
+kubectl get pods
+kubectl get svc
+Get the IP address of one of the Nodes and the NodePort for the web Service. Populate the variables with the appropriate values
+````
+````
+
+kubectl get nodes
+kubectl describe svc web
+
+kubectl get nodes
+export NODE_IP=<NODE_IP>
+export NODE_PORT=<NODE_PORT>
+Initialize the database with sample schema
 
 ```
+curl http://$NODE_IP:$NODE_PORT/init
+Insert some sample data
+```
+```
+curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "1", "user":"John Doe"}' http://$NODE_IP:$NODE_PORT/users/add
+curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "2", "user":"Jane Doe"}' http://$NODE_IP:$NODE_PORT/users/add
+curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "3", "user":"Bill Collins"}' http://$NODE_IP:$NODE_PORT/users/add
+curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "4", "user":"Mike Taylor"}' http://$NODE_IP:$NODE_PORT/users/add
+Access the data
+```
+````
+curl http://$NODE_IP:$NODE_PORT/users/1
+The second time you access the data, it appends '(c)' indicating that it is pulled from the Redis cache
+````
+```
+curl http://$NODE_IP:$NODE_PORT/users/1
+Create 10 Replica Sets and check the data
+```
+```
+kubectl create -f web-rc.yml
+curl http://$NODE_IP:$NODE_PORT/users/1
+```
+
+
+
+
 
