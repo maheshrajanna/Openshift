@@ -148,9 +148,9 @@ DNS and UI etc.
 
 
 
-# Objects in Kubernetes
+# Understanding Objects
 
-1. Kubernetes Pod 
+1. POD 
     * Group of one or more containers that are always co-located, co-scheduled, and run in a shared context  
     * Containers in the same pod have the same hostname 
     * Each pod is isolated by Process ID (PID) namespace, Network namespace, Interprocess Communication (IPC) namespace
@@ -158,7 +158,7 @@ DNS and UI etc.
     * Alternative to a VM with multiple processes
 
 
-2. Services 
+2. SERVICES 
     * An abstraction to define a logical set of Pods bound by a policy by to access them 
     * Services are exposed through internal and external endpoints/cluster 
     * Services can also point to non-Kubernetes endpoints through a Virtual-IP-Bridge 
@@ -166,7 +166,7 @@ DNS and UI etc.
     * Interfaces with kube-proxy to manipulate iptables 
 
 
-3. Replication Controller 
+3. REPLICATION CONTROLLER 
     * Ensures that a Pod or homogeneous set of Pods are always up and available. Always maintains desired number of Pods, 
       If there are excess Pods, they get killed and New pods are launched when they fail, get deleted, or terminated.
     * Creating a replication controller with a count of 1 ensures that a Pod is always available. Replication Controller and
