@@ -43,7 +43,7 @@ https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html
 
 # Worker node
 
-![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/Master.png?raw=true "Optional Title")
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/Node.png?raw=true "Optional Title")
 
 
 The pods are run here, so the worker node contains all the necessary services to manage the networking between the containers, communicate with the master node, and assign resources to the containers scheduled.
