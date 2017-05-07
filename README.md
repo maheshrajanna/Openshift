@@ -201,47 +201,58 @@ When the additional Web Pods are launched manually or through a Replica Set, co-
 
 Build a Docker image from existing Python source code and push it to Docker Hub. Replace DOCKER_HUB_USER with your Docker Hub username.
 
+https://github.com/maheshrajanna/Openshift/tree/master/Build
+
 ```
 cd Build
 docker build . -t <DOCKER_HUB_USER>/py-red-sql
 docker push <DOCKER_HUB_USER>/py-red-sql
 Deploy the app to Kubernetes
-````
 
-````
+``` 
+
+
+https://github.com/maheshrajanna/Openshift/tree/master/Deploy
+
+```
 cd ../Deploy
-kubectl create -f db-pod.yml
-kubectl create -f db-svc.yml
-kubectl create -f web-pod-1.yml
-kubectl create -f web-svc.yml
+oc create -f db-pod.yml
+oc create -f db-svc.yml
+oc create -f web-pod-1.yml
+oc create -f web-svc.yml
 Check that the Pods and Services are created
-````
-````
-kubectl get pods
-kubectl get svc
+
+```
+
+```
+oc get pods
+oc get svc
 Get the IP address of one of the Nodes and the NodePort for the web Service. Populate the variables with the appropriate values
-````
-````
 
-kubectl get nodes
-kubectl describe svc web
+```
 
-kubectl get nodes
+```
+
+oc get nodes
+oc describe svc web
+
+oc get nodes
 export NODE_IP=<NODE_IP>
 export NODE_PORT=<NODE_PORT>
+```
 Initialize the database with sample schema
 
 ```
 curl http://$NODE_IP:$NODE_PORT/init
 Insert some sample data
+
 ```
 ```
-curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "1", "user":"John Doe"}' http://$NODE_IP:$NODE_PORT/users/add
-curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "2", "user":"Jane Doe"}' http://$NODE_IP:$NODE_PORT/users/add
-curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "3", "user":"Bill Collins"}' http://$NODE_IP:$NODE_PORT/users/add
-curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "4", "user":"Mike Taylor"}' http://$NODE_IP:$NODE_PORT/users/add
+curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "1", "user":"Mahesh Raj"}' http://$NODE_IP:$NODE_PORT/users/add
+curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "2", "user":"Best Test"}' http://$NODE_IP:$NODE_PORT/users/add
 Access the data
 ```
+
 ````
 curl http://$NODE_IP:$NODE_PORT/users/1
 The second time you access the data, it appends '(c)' indicating that it is pulled from the Redis cache
@@ -251,7 +262,7 @@ curl http://$NODE_IP:$NODE_PORT/users/1
 Create 10 Replica Sets and check the data
 ```
 ```
-kubectl create -f web-rc.yml
+oc create -f web-rc.yml
 curl http://$NODE_IP:$NODE_PORT/users/1
 ```
 
