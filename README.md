@@ -59,14 +59,15 @@ https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html
 # Openshift
 
 
-![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/DKO.png?raw=true "Optional Title")
+   
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/DKO.png?raw=true "Optional Title")
 
 
 
 # Openshift Architecture
 
    
-![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Architecture.png?raw=true "Optional Title")
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/Architecture.png?raw=true "Optional Title")
 
 
 
@@ -107,7 +108,7 @@ https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html
 
 # Worker node
 
-![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Master.png?raw=true "Optional Title")
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/Master.png?raw=true "Optional Title")
 
 
 The pods are run here, so the worker node contains all the necessary services to manage the networking between the containers, communicate with the master node, and assign resources to the containers scheduled.
@@ -187,7 +188,13 @@ DNS and UI etc.
 
 
 
-Multi-Container Pods in OPenshift
+
+
+
+# Multi-Container Pods in OPenshift
+
+
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/WEB.PNG?raw=true "Optional Title")
 
 
 Web Pod has a Python Flask container and a Redis container
@@ -195,7 +202,6 @@ DB Pod has a MySQL container
 When data is retrieved through the Python REST API, it first checks within Redis cache before accessing MySQL
 Each time data is fetched from MySQL, it gets cached in the Redis container of the same Pod as the Python Flask container
 When the additional Web Pods are launched manually or through a Replica Set, co-located pairs of Python Flask and Redis containers are scheduled together
-
 
 
 
