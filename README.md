@@ -103,7 +103,7 @@ An example of such a controller is the Replication controller, which takes care 
 Other examples of controllers are endpoints controller, namespace controller, and serviceaccounts controller, but we will not dive into details here.
 
 
-![Alt text](https://github.com/maheshrajanna/Docker/blob/master/fiyle.png?raw=true "Optional Title")
+![Alt text](https://github.com/maheshrajanna/Docker/blob/master/Node.png?raw=true "Optional Title")
 
 
 # Worker node
