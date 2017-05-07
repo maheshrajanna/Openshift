@@ -1,60 +1,3 @@
-http://blog.arungupta.me/openshift-v3-getting-started-javaee7-wildfly-mysql/
-
-A project is a Kubernetes namespace with additional annotations
-
-
-
-
-Each project scopes its own set of:
-
-Objects : Pods, services, replication controllers, etc.
-
-Policies : Rules for which users can or cannot perform actions on objects.
-
-Constraints : Quotas for each kind of object that can be limited.
-
-Service accounts : Service accounts act automatically with designated access to objects in the project.
-
-$ oc new-project <project_name> \
-    --description="<description>" --display-name="<display_name>"
-    
-    $ oc get projects
-    $ oc project <project_name> : to change the project
-    
-    $ oc policy add-role-to-user admin mahesh -n project name
-    $ oc status : The oc status command provides a high-level overview of the current project.
-    
-
-
-
-# Service Account
-
-When a person uses the OpenShift Enterprise CLI or web console, their API token authenticates them to the OpenShift API. However, when a regular user’s credentials are not available, it is common for components to make API calls independently. For example:
-
-    Replication controllers make API calls to create or delete pods.
-
-    Applications inside containers could make API calls for discovery purposes.
-
-    External applications could make API calls for monitoring or integration purposes.
-
-Service accounts provide a flexible way to control API access without sharing a regular user’s credentials.
-
-
-
-
-Three service accounts are automatically created in every project:
-
-    builder is used by build pods. It is given the system:image-builder role, which allows pushing images to any image stream in the project using the internal Docker registry.
-
-    deployer is used by deployment pods and is given the system:deployer role, which allows viewing and modifying replication controllers and pods in the project.
-
-    default is used to run all other pods unless they specify a different service account.
-
-
-
-https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html
-
-
 
 # Openshift
 
@@ -185,6 +128,63 @@ DNS and UI etc.
       even treating pods with potentially different Docker containers as related entities.
       https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
+
+
+
+# Project 
+
+A project is a Kubernetes namespace with additional annotations
+
+Each project scopes its own set of:
+
+Objects : Pods, services, replication controllers, etc.
+
+Policies : Rules for which users can or cannot perform actions on objects.
+
+Constraints : Quotas for each kind of object that can be limited.
+
+Service accounts : Service accounts act automatically with designated access to objects in the project.
+
+$ oc new-project <project_name> \
+    --description="<description>" --display-name="<display_name>"
+    
+    $ oc get projects
+    $ oc project <project_name> : to change the project
+    
+    $ oc policy add-role-to-user admin mahesh -n project name
+    $ oc status : The oc status command provides a high-level overview of the current project.
+    
+
+
+
+# Service Account
+
+When a person uses the OpenShift Enterprise CLI or web console, their API token authenticates them to the OpenShift API. However, when a regular user’s credentials are not available, it is common for components to make API calls independently. For example:
+
+    Replication controllers make API calls to create or delete pods.
+
+    Applications inside containers could make API calls for discovery purposes.
+
+    External applications could make API calls for monitoring or integration purposes.
+
+Service accounts provide a flexible way to control API access without sharing a regular user’s credentials.
+
+### Three service accounts are automatically created in every project:
+
+    builder is used by build pods. It is given the system:image-builder role, which allows pushing images to any image stream in the project using the internal Docker registry.
+
+    deployer is used by deployment pods and is given the system:deployer role, which allows viewing and modifying replication controllers and pods in the project.
+
+    default is used to run all other pods unless they specify a different service account.
+
+
+Links : http://blog.arungupta.me/openshift-v3-getting-started-javaee7-wildfly-mysql/
+        https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html
+
+
+
+
+### Additional Features in Openshift from kubernetes
 
 
 
