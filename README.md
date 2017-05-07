@@ -1,12 +1,4 @@
 
-# Openshift
-
-
-   
-![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/DKO.png?raw=true "Optional Title")
-
-
-
 # Openshift Architecture
 
    
