@@ -65,8 +65,7 @@ https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html
 
 # Openshift Architecture
 
-    ### Master                                      ### Node
-
+   
 ![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Architecture.png?raw=true "Optional Title")
 
 
@@ -104,10 +103,11 @@ It provides a REST API for CRUD operations as well as an interface to register w
 Example of data stored by Kubernetes in etcd are jobs being scheduled, created and deployed pod/service details and state, namespaces and replication informations, etc.
 
 
-![Alt text](https://github.com/maheshrajanna/Docker/blob/master/Node.png?raw=true "Optional Title")
-
 
 # Worker node
+
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Master.png?raw=true "Optional Title")
+
 
 The pods are run here, so the worker node contains all the necessary services to manage the networking between the containers, communicate with the master node, and assign resources to the containers scheduled.
 
@@ -138,24 +138,23 @@ Collecting Docker Log Files with Fluentd and Elasticsearch.
 
 https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch/fluentd-es-image
  
-
 ### POD
 
 Group of one or more containers that are always co-located, co-scheduled, and run in a shared context 
 
-
 ### Additional Addons 
 
+DNS and UI etc.
 
 
 
-
-**Types*
+# Objects in Kubernetes
 
 1. Kubernetes Pod 
     * Group of one or more containers that are always co-located, co-scheduled, and run in a shared context  
     * Containers in the same pod have the same hostname 
-    * Each pod is isolated by ○ Process ID (PID) namespace ○ Network namespace ○ Interprocess Communication (IPC) namespace ○ Unix Time       Sharing (UTS) namespace 
+    * Each pod is isolated by Process ID (PID) namespace, Network namespace, Interprocess Communication (IPC) namespace
+      and Unix Time Sharing (UTS) namespace 
     * Alternative to a VM with multiple processes
 
 
@@ -168,8 +167,10 @@ Group of one or more containers that are always co-located, co-scheduled, and ru
 
 
 3. Replication Controller 
-    * Ensures that a Pod or homogeneous set of Pods are always up and available. Always maintains desired number of Pods ○ If there           are excess Pods, they get killed and New pods are launched when they fail, get deleted, or terminated.
-    * Creating a replication controller with a count of 1 ensures that a Pod is always available. Replication Controller and Pods are         associated through "Labels".
+    * Ensures that a Pod or homogeneous set of Pods are always up and available. Always maintains desired number of Pods, 
+      If there are excess Pods, they get killed and New pods are launched when they fail, get deleted, or terminated.
+    * Creating a replication controller with a count of 1 ensures that a Pod is always available. Replication Controller and
+      Pods are associated through "Labels".
 
 
 
