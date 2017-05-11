@@ -127,7 +127,7 @@ DNS and UI etc.
 
 A project is a Kubernetes namespace with additional annotations
 
-Each project scopes its own set of:
+Each project scopes its own set of: *objects* *Policies* and *Constraints*
 
 Objects : Pods, services, replication controllers, etc.
 
@@ -161,13 +161,58 @@ When a person uses the OpenShift Enterprise CLI or web console, their API token 
 
 Service accounts provide a flexible way to control API access without sharing a regular user’s credentials.
 
-### Three service accounts are automatically created in every project:
+### Three service accounts are automatically created in every project: *Builder* *Deployer* and *Default*
 
     builder is used by build pods. It is given the system:image-builder role, which allows pushing images to any image stream in the project using the internal Docker registry.
 
     deployer is used by deployment pods and is given the system:deployer role, which allows viewing and modifying replication controllers and pods in the project.
 
     default is used to run all other pods unless they specify a different service account.
+
+
+# Understating Application Health Checks
+
+ OpenShift applications have a number of options to detect and handle unhealthy containers. 
+
+Liveness Probe  : A liveness probe checks if the container in which it is configured is still running. If the liveness probe fails, the                   kubelet kills the container, which will be subjected to its restart policy. Set a liveness check by configuring the                     *template.spec.containers.livenessprobe* stanza of a pod configuration.
+
+
+Container Execution Checks
+```
+livenessProbe:
+  exec:
+    command:
+    - cat
+    - /tmp/health
+  initialDelaySeconds: 15
+  timeoutSeconds: 1
+```
+
+TCP Socket Checks
+```
+livenessProbe:
+  tcpSocket:
+    port: 8080
+  initialDelaySeconds: 15
+  timeoutSeconds: 1
+```
+
+
+Readiness Probe : A readiness probe determines if a container is ready to service requests. If the readiness probe fails a container,                     the endpoints controller ensures the container has its IP address removed from the endpoints of all services. A                         readiness probe can be used to signal to the endpoints controller that even though a container is running, it should                     not receive any traffic from a proxy. Set a readiness check by configuring the                                   *template.spec.containers.readinessprobe* stanza of a pod configuration.
+
+
+HTTP Checks
+
+```
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 15
+  timeoutSeconds: 1
+```
+
+
 
 
 Links : http://blog.arungupta.me/openshift-v3-getting-started-javaee7-wildfly-mysql/
