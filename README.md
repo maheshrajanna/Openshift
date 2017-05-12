@@ -1,5 +1,5 @@
 
-# Openshift Architecture
+# Kubernetes Architecture
 
    
 ![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/Architecture.png?raw=true "Optional Title")
@@ -82,6 +82,7 @@ Group of one or more containers that are always co-located, co-scheduled, and ru
 ### Additional Addons 
 
 DNS and UI etc.
+For this reason, OpenShift has a built-in DNS so that the services can be reached by the service DNS as well as the service IP/port.
 
 
 
