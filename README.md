@@ -319,9 +319,11 @@ curl http://$NODE_IP:$NODE_PORT/users/1
 
 ### Port Forwarding
 
+```
 $ oc port-forward -p <pod> [<local_port>:]<pod_port> [[<local_port>:]<pod_port> ...]
+```
 
-000	
+5000	
 The client listens on port 5000 locally and forwards to 5000 in the pod.
 
 6000:5000	
@@ -330,8 +332,9 @@ The client listens on port 6000 locally and forwards to 5000 in the pod.
 :5000 or 0:5000	
 The client selects a free local port and forwards to 5000 in the pod.
 
+```
 $ oc port-forward -p mypod 8888:5000
-
+```
 
 
 
