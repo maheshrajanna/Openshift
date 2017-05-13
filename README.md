@@ -227,11 +227,12 @@ Links : http://blog.arungupta.me/openshift-v3-getting-started-javaee7-wildfly-my
 
 
 
-## Commands should know 
+### Commands should know 
 
-### To add/remove a user to cluster Admin Role:
 
 ```
+add/remove user to cluster Admin Role:
+
 Create Cluster Admin
 $ oadm policy add-cluster-role-to-user cluster-admin <username> 
 The cluster admin role by default will grant all the privileges to all the projects
@@ -243,8 +244,6 @@ To remove user from cluster-admin role
 $ oadm policy remove-cluster-role-from-user cluster-admin <username>
 
 ```
-
-### 
 
 ```
 Create users in OpenShift:
