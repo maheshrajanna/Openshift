@@ -215,7 +215,6 @@ readinessProbe:
 
 
 
-
 Links : http://blog.arungupta.me/openshift-v3-getting-started-javaee7-wildfly-mysql/
         https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html
 
@@ -223,6 +222,88 @@ Links : http://blog.arungupta.me/openshift-v3-getting-started-javaee7-wildfly-my
 
 
 ### Additional Features in Openshift from kubernetes
+
+
+
+
+
+## Commands should know 
+
+### To add/remove a user to cluster Admin Role:
+
+```
+Create Cluster Admin
+$ oadm policy add-cluster-role-to-user cluster-admin <username> 
+The cluster admin role by default will grant all the privileges to all the projects
+
+$ oc describe clusterPolicyBindings :default
+The command will list the different Roles like cluster-admin, cluster-reader, node-monitor etc. and users associated to every roles.
+
+To remove user from cluster-admin role
+$ oadm policy remove-cluster-role-from-user cluster-admin <username>
+
+```
+
+### 
+
+```
+Create users in OpenShift:
+$ htpasswd -b /etc/origin/master/htpasswd <username> <password>
+
+Create a openshift group:
+$ oadm groups new <Group>
+
+User will be added to the group using below command
+$ oadm groups add-users <group> <username>
+
+Check the groups and users under group
+$ oc get groups
+```
+
+```
+To give Edit previleage to the Group to a Project
+
+* Get into the project
+$ oc projects <Project>
+
+*Run the add role command to provide the edit previlage to group
+$ oadm policy add-role-to-group <group>
+
+```
+
+```
+To give Edit previleage to the User to a Project(Make sure Project is created):
+
+* Get into the project
+oc projects <Project>
+
+*Run the add role command to provide the view previlage to user
+oadm policy add-role-to-user view <user>
+
+* Run below command to check which user has privileges to the project
+oc describe policyBindings :default -n <ProjectName>
+
+```
+
+
+### Port Forwarding
+
+```
+$ oc port-forward -p <pod> [<local_port>:]<pod_port> [[<local_port>:]<pod_port> ...]
+```
+
+5000	
+The client listens on port 5000 locally and forwards to 5000 in the pod.
+
+6000:5000	
+The client listens on port 6000 locally and forwards to 5000 in the pod.
+
+:5000 or 0:5000	
+The client selects a free local port and forwards to 5000 in the pod.
+
+```
+$ oc port-forward -p mypod 8888:5000
+```
 
 
 
@@ -318,24 +399,6 @@ curl http://$NODE_IP:$NODE_PORT/users/1
 
 
 
-### Port Forwarding
-
-```
-$ oc port-forward -p <pod> [<local_port>:]<pod_port> [[<local_port>:]<pod_port> ...]
-```
-
-5000	
-The client listens on port 5000 locally and forwards to 5000 in the pod.
-
-6000:5000	
-The client listens on port 6000 locally and forwards to 5000 in the pod.
-
-:5000 or 0:5000	
-The client selects a free local port and forwards to 5000 in the pod.
-
-```
-$ oc port-forward -p mypod 8888:5000
-```
 
 
 
