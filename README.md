@@ -274,13 +274,13 @@ $ oadm policy add-role-to-group <group>
 To give Edit previleage to the User to a Project(Make sure Project is created):
 
 * Get into the project
-oc projects <Project>
+$ oc projects <Project>
 
 *Run the add role command to provide the view previlage to user
-oadm policy add-role-to-user view <user>
+$ oadm policy add-role-to-user view <user>
 
 * Run below command to check which user has privileges to the project
-oc describe policyBindings :default -n <ProjectName>
+$ oc describe policyBindings :default -n <ProjectName>
 
 ```
 
