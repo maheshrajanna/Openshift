@@ -122,6 +122,16 @@ For this reason, OpenShift has a built-in DNS so that the services can be reache
       https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
 
+# Added features in Openshift 
+
+### kubernetes
+
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/kuber.png?raw=true "Optional Title")
+
+
+### Openshift
+
+![Alt text](https://github.com/maheshrajanna/Openshift/blob/master/Images/Opnshift.png?raw=true "Optional Title")
 
 
 # Project 
