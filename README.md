@@ -172,7 +172,7 @@ When a person uses the OpenShift Enterprise CLI or web console, their API token 
 
 Service accounts provide a flexible way to control API access without sharing a regular user’s credentials.
 
-### Three service accounts are automatically created in every project: *Builder* *Deployer* and *Default*
+### Three service accounts are automatically created in every project: *Builder*, *Deployer* and *Default*
 
     builder is used by build pods. It is given the system:image-builder role, which allows pushing images to any image stream in the project using the internal Docker registry.
 
